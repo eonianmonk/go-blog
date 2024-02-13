@@ -34,7 +34,7 @@ func NewServer(ep string, connStr string, log *logrus.Logger) {
 		log: log,
 		q:   q,
 	}
-	blogpb.RegisterBlogServer(rpcs, s)
+	blogpb.RegisterBlogServer(rpcs, &s)
 	if err := rpcs.Serve(l); err != nil {
 		panic(err)
 	}

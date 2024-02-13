@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	runCmd(os.Args)
+	runCmd(os.Args[1:])
 }
 
 func runCmd(args []string) {
@@ -29,4 +29,5 @@ func runCmd(args []string) {
 	default:
 		log.Fatal("unknown command")
 	}
+
 }

@@ -1,12 +1,7 @@
-FROM golang:1.21.3-bullseye
+FROM golang:1.21.3-alpine
 
 WORKDIR /
 
-USER root
-RUN apt-get update \
- && DEBIAN_FRONTEND=noninteractive \
-    apt-get install --no-install-recommends --assume-yes \
-      docker.io
 
 COPY blogo blogo 
 

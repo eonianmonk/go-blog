@@ -1,0 +1,52 @@
+syntax = "proto3";
+
+import "comment.proto";
+
+
+package blog;
+
+option go_package = "./blogpb";
+
+enum State {
+    Readable = 0;
+    Deleted = 1;
+    Hidden = 2;
+}
+
+message PostId {
+    int32 id = 1;
+}
+
+// post metatdata
+message PostHeader {
+    int32 post_id = 1;
+    string author = 2;
+    string title = 3;
+    State state = 4;
+    optional string body = 5;
+    repeated Comment comments = 6;
+}
+
+message PostBody {
+    string content = 1;
+}
+
+message RequestHeaders {
+    int32 number = 1; // amount of headers
+    int32 offset = 2; // offset for pagination
+}
+
+message ReturnHeaders { 
+    repeated PostHeader headers = 1;
+}
+
+service Blog {
+    rpc CreatePost(PostHeader) returns (PostId);
+    rpc ReadPost(PostId) returns (PostHeader); // returns post content + metadata
+    rpc UpdatePost(PostHeader) returns (PostId);
+    rpc DeletePost(PostId) returns (PostId);
+    
+    // returns headers without body
+    rpc GetHeaders(RequestHeaders) returns (ReturnHeaders);
+}
+

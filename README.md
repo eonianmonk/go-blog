@@ -1,0 +1,1 @@
+To run docker first build with 'make build'

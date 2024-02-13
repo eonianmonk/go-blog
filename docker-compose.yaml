@@ -4,6 +4,10 @@ services:
   postgres:
     image: postgres:15-alpine
     restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: "blogo"
     networks:
       - mynetwork
     volumes:
@@ -18,10 +22,10 @@ services:
       context: .
       dockerfile: Dockerfile
     command: > 
-      blogo migrate
-      blogo run-rpc --port=8081
+      ./blogo migrate
+      ./blogo run-rpc --port=8081
     environment:
-      - RPC_DB=postgres://postgres:postgres@localhost:5432/rate?sslmode=disable
+      - RPC_DB=postgres://postgres:postgres@localhost:5432/blogo?sslmode=disable
     depends_on:
       - postgres
     ports:
@@ -33,7 +37,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    command: blogo run-gateway --rpc=8081 --port=8080
+    command: ./blogo run-gateway --rpc=8081 --port=8080
     ports:
       - "8080:8080"
     depends_on:

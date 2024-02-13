@@ -5,11 +5,11 @@ proto:
 sqlc:
 	sqlc generate
 
-build:
-	echo "Not yet"
-
 serve_rpc:
 	echo "Not yet"
 
 serve_gateway:
 	echo "Not yet"
+
+build:
+	go build -o blogo ./cmd

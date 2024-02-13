@@ -13,3 +13,4 @@ serve_gateway:
 
 build:
 	go build -o blogo ./cmd
+	echo 'build complete'
